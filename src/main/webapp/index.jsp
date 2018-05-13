@@ -48,13 +48,17 @@
       </ul>
 
       <p>
+        <strong>Team Name: </strong> 15
+      </p>
+      
+      <p>
         <strong>Project Advisor: </strong> Adrian Swanberg
       </p>
 
       <p>
         <strong>Project Members: </strong> Annie Tang, Chibuikem Ohanele and Hannah Elarabawy
       </p>
-      
+
     </div>
   </div>
 </body>

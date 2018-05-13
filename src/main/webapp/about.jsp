@@ -66,6 +66,10 @@
       </p>
 
       <p>
+        <strong>Team Name: </strong> 15
+      </p>
+
+      <p>
         <strong>Project Advisor: </strong> Adrian Swanberg
       </p>
 
