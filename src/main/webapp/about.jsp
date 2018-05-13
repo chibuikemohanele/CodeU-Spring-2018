@@ -64,6 +64,15 @@
         This page should also be used to describe the features and improvements
         you've added.
       </p>
+
+      <p>
+        <strong>Project Advisor: </strong> Adrian Swanberg
+      </p>
+
+      <p>
+        <strong>Project Members: </strong> Annie Tang, Chibuikem Ohanele and Hannah Elarabawy
+      </p>
+
     </div>
   </div>
 </body>

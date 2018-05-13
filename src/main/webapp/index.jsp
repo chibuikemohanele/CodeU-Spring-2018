@@ -46,6 +46,15 @@
         <li>View the <a href="/about.jsp">about</a> page to learn more about the
             project.</li>
       </ul>
+
+      <p>
+        <strong>Project Advisor: </strong> Adrian Swanberg
+      </p>
+
+      <p>
+        <strong>Project Members: </strong> Annie Tang, Chibuikem Ohanele and Hannah Elarabawy
+      </p>
+      
     </div>
   </div>
 </body>
