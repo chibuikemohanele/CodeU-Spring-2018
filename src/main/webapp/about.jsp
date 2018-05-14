@@ -64,6 +64,22 @@
         This page should also be used to describe the features and improvements
         you've added.
       </p>
+
+      <p>
+        <strong>Team Name: </strong> 15
+      </p>
+
+      <p>
+        <strong>Project Advisor: </strong> Adrian Swanberg
+      </p>
+
+      <p>
+        <strong>Project Members: </strong>
+        <br>Annie Tang | University of California-Berkeley
+        <br>Chibuikem Ohanele | University of California-Los Angeles
+        <br>Hannah Elarabawy | Purdue University
+      </p>
+
     </div>
   </div>
 </body>
