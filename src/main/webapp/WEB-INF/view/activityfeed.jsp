@@ -39,26 +39,16 @@
 
   <div id="container">
 
-    <% if(request.getAttribute("error") != null){ %>
-        <h2 style="color:red"><%= request.getAttribute("error") %></h2>
-    <% } %>
-
-    <% if(request.getSession().getAttribute("user") != null){ %>
-      <h1>New Conversation</h1>
-      <form action="/activity" method="POST">
-          <div class="form-group">
-            <label class="form-control-label">Title:</label>
-          <input type="text" name="conversationTitle">
-        </div>
-
-        <button type="submit">Create</button>
-      </form>
-
-      <hr/>
-    <% } %>
-
     <h1>Activity Feed</h1>
     <hr/>
+
+    <div style="background-color:Silver">
+      <p><strong>Sat Mar 10 09:39:36 PST 2018: </strong>Ada joined!</p>
+      <p><strong>Sat Mar 10 06:52:56 PST 2018: </strong>Grace sent a message in Programming Chat: "Hey Friends!"</p>
+      <p><strong>Sat Mar 10 04:06:16 PST 2018: </strong>Alan sent a message in Cat Chat: "Yo yo yo!"</p>
+      <p><strong>Sat Mar 10 01:19:36 PST 2018: </strong>Margaret joined!</p>
+    </div>
+
   </div>
 </body>
 </html>
