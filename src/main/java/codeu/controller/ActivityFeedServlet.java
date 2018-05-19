@@ -44,12 +44,14 @@ public class ActivityFeedServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
-      // Set response content type
-      response.setContentType("text/html");
+      // // Set response content type
+      // response.setContentType("text/html");
 
-      // Actual logic goes here.
-      PrintWriter out = response.getWriter();
-      out.println("<h1>" + message + "</h1>");
+      // // Actual logic goes here.
+      // PrintWriter out = response.getWriter();
+      // out.println("<h1>" + message + "</h1>");
+
+      request.getRequestDispatcher("/WEB-INF/view/activityfeed.jsp").forward(request, response);
   }
 
   public void destroy() {
