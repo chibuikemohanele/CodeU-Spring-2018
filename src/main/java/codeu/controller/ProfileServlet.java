@@ -17,9 +17,11 @@ public class ProfileServlet extends HttpServlet
     public void doGet(HttpServletRequest request, HttpServletResponse response)
     throws IOException, ServletException 
     {
-        String username = request.getParameter("username");
+        String requestUrl = request.getRequestURI();
+        String username = requestUrl.substring("/profile/".length());
+        //String username = request.getParameter("username");
         
-        if (username.equals(request.getSession().getAttribute("username"))) 
+        if (username.equals(request.getSession().getAttribute("user"))) 
         {
             request.getRequestDispatcher("/WEB-INF/view/profile.jsp").forward(request, response);
             return;

@@ -12,6 +12,7 @@
     <% if(request.getSession().getAttribute("user") != null) { %>
       <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
       <a href="/profile">Profile</a>
+      <form action="/profile/<%= user %>" method="POST"></form>
     <% } else { %>
       <a href="/login">Login</a>
     <% } %>
