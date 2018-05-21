@@ -27,6 +27,7 @@ public class ProfileServlet extends HttpServlet
         else
         {
             request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
+            return;
         }
     }
 
