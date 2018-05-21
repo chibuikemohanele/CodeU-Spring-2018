@@ -75,7 +75,10 @@
       </p>
 
       <p>
-        <strong>Project Members: </strong> Annie Tang, Chibuikem Ohanele and Hannah Elarabawy
+        <strong>Project Members: </strong>
+        <br>Annie Tang | University of California-Berkeley
+        <br>Chibuikem Ohanele | Purdue University
+        <br>Hannah Elarabawy | University of California-Los Angeles
       </p>
 
     </div>
