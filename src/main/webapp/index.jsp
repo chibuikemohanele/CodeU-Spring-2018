@@ -23,6 +23,7 @@
 
   <nav>
     <a id="navTitle" href="/">CodeU Chat App</a>
+    <a href="/activityfeed">Activity Feed</a>
     <a href="/conversations">Conversations</a>
     <% if(request.getSession().getAttribute("user") != null){ %>
       <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
@@ -46,6 +47,19 @@
         <li>View the <a href="/about.jsp">about</a> page to learn more about the
             project.</li>
       </ul>
+
+      <p>
+        <strong>Team Name: </strong> 15
+      </p>
+      
+      <p>
+        <strong>Project Advisor: </strong> Adrian Swanberg
+      </p>
+
+      <p>
+        <strong>Project Members: </strong> Annie Tang, Chibuikem Ohanele and Hannah Elarabawy
+      </p>
+
     </div>
   </div>
 </body>
