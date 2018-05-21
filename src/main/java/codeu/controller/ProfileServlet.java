@@ -11,14 +11,14 @@ public class ProfileServlet extends HttpServlet
 {
     /** Store class that gives access to Users. */
     //private UserStore userStore;
-
+    
     //Forwards the request to the profile.jsp to create the profile page
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
     throws IOException, ServletException 
     {
         String username = request.getParameter("username");
-
+        
         if (username.equals(request.getSession().getAttribute("username"))) 
         {
             request.getRequestDispatcher("/WEB-INF/view/profile.jsp").forward(request, response);
