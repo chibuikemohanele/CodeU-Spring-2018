@@ -23,7 +23,6 @@
 
   <nav>
     <a id="navTitle" href="/">CodeU Chat App</a>
-    <a href="/activityfeed">Activity Feed</a>
     <a href="/conversations">Conversations</a>
     <% if(request.getSession().getAttribute("user") != null){ %>
       <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
@@ -75,14 +74,10 @@
       </p>
 
       <p>
-<<<<<<< HEAD
-        <strong>Project Members: </strong> Annie Tang, Chibuikem Ohanele and Hannah Elarabawy
-=======
         <strong>Project Members: </strong>
         <br>Annie Tang | University of California-Berkeley
         <br>Chibuikem Ohanele | Purdue University
         <br>Hannah Elarabawy | University of California-Los Angeles
->>>>>>> b42a3f11e31a92eb41d9210522e19a5047883b5d
       </p>
 
     </div>
