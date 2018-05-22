@@ -11,8 +11,7 @@
     <a href="/conversations">Conversations</a>
     <% if(request.getSession().getAttribute("user") != null) { %>
       <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
-      <!-- <a href="/profile">Profile</a> -->
-      <form action="/profile/<%= user %>" method="POST"></form>
+      <a href="/profile/<%= request.getSession().getAttribute("user") %></a>">Profile</a> 
     <% } else { %>
       <a href="/login">Login</a>
     <% } %>
