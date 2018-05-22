@@ -34,7 +34,8 @@
     <a href="/conversations">Conversations</a>
     <a href="/about.jsp">About</a>
     <a href="/activityfeed">Activity Feed</a>
-    <% if(request.getSession().getAttribute("user").equals("annietang")) { %>
+    <% if(request.getSession().getAttribute("user").equals("annietang") ||
+        request.getSession().getAttribute("user").equals("chibuikem")) { %>
         <a href="/admin.jsp">Admin Page</a>
     <% } %>
   </nav>
