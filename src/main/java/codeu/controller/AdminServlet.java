@@ -61,7 +61,7 @@ public class AdminServlet extends HttpServlet {
         List<User> listOfAllUsers = userStore.getAllUsers();
         request.setAttribute("users", listOfAllUsers);
 
-        request.getRequestDispatcher("/admin").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/view/admin.jsp").forward(request, response);
   }
 
   // @Override
