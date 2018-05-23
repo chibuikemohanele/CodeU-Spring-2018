@@ -23,21 +23,19 @@
     <h2>This is your profile.</h2>
 
 
-    <!-- <% if(request.getAttribute("error") != null){ %>
-        <h2 style="color:red"><%= request.getAttribute("error") %></h2>
-    <% } %>
+    <% if(request.getSession().getAttribute("user") != null){ %>
+      <h1>About Me/h1>
+      <form action="/profile" method="POST">
+          <div class="form-group">
+            <label class="form-control-label">Title:</label>
+          <input type="text" name="Edit">
+        </div>
 
-    <form action="/register" method="POST">
-      <label for="username">Username: </label>
-      <br/>
-      <input type="text" name="username" id="username">
-      <br/>
-      <label for="password">Password: </label>
-      <br/>
-      <input type="password" name="password" id="password">
-      <br/><br/>
-      <button type="submit">Submit</button>
-    </form> -->
+        <button type="submit">Create</button>
+      </form>
+
+      <hr/>
+    <% } %>
   </div>
 </body>
 </html>
