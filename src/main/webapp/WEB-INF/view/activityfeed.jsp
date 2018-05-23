@@ -26,7 +26,6 @@
 
   <nav>
     <a id="navTitle" href="/">CodeU Chat App</a>
-    <a id="navTitle" href="/">CodeU Chat App</a>
     <% if(request.getSession().getAttribute("user") != null){ %>
       <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
     <% } else{ %>
