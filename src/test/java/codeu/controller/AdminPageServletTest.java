@@ -36,22 +36,30 @@ public class AdminPageServletTest {
 
     mockResponse = Mockito.mock(HttpServletResponse.class);
     mockRequestDispatcher = Mockito.mock(RequestDispatcher.class);
-    Mockito.when(mockRequest.getRequestDispatcher("/WEB-INF/view/chat.jsp"))
+    Mockito.when(mockRequest.getRequestDispatcher("/WEB-INF/view/admin.jsp"))
         .thenReturn(mockRequestDispatcher);
 
     mockConversationStore = Mockito.mock(ConversationStore.class);
-    chatServlet.setConversationStore(mockConversationStore);
+    adminServlet.setConversationStore(mockConversationStore);
 
     mockMessageStore = Mockito.mock(MessageStore.class);
-    chatServlet.setMessageStore(mockMessageStore);
+    adminServlet.setMessageStore(mockMessageStore);
 
     mockUserStore = Mockito.mock(UserStore.class);
-    chatServlet.setUserStore(mockUserStore);
+    adminServlet.setUserStore(mockUserStore);
   }
 
   @Test
   public void testDoGet() throws IOException, ServletException {
+    List<Conversation> fakeConversationList = new ArrayList<>();
+    fakeConversationList.add(
+        new Conversation(UUID.randomUUID(), UUID.randomUUID(), "test_conversation", Instant.now()));
+    Mockito.when(mockConversationStore.getAllConversations()).thenReturn(fakeConversationList);
+
     adminServlet.doGet(mockRequest, mockResponse);
+    Mockito.verify(mockRequest).setAttribute("conversations", fakeConversationList);
+    Mockito.verify(mockRequest).setAttribute("messages", fakeMessageList);
+    Mockito.verify(mockRequest).setAttribute("users", fakeUsersList);
     Mockito.verify(mockRequestDispatcher).forward(mockRequest, mockResponse);
   }
 }
