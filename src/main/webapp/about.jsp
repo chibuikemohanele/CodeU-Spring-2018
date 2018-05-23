@@ -33,7 +33,7 @@
     <a href="/activityfeed">Activity Feed</a>
     <% if(request.getSession().getAttribute("user").equals("annietang") ||
         request.getSession().getAttribute("user").equals("chibuikem")) { %>
-        <a href="/WEB-INF/view/admin.jsp">Admin Page</a>
+        <a href="/admin.jsp">Admin Page</a>
     <% } %>
   </nav>
 
