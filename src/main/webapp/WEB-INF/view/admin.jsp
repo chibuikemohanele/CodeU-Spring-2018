@@ -39,24 +39,20 @@
     <%
     List<Conversation> conversations = (List<Conversation>) request.getAttribute("conversations");
     List<Message> messages = (List<Message>) request.getAttribute("messages");
-    List<Message> users = (List<User>) request.getAttribute("users");
+    List<User> users = (List<User>) request.getAttribute("users");
     %>
+    <ul>
 
     <% if(users != null){ %>
-      <ul>
         <li><strong>Users:</strong> <%= users.size() %> </li>
-      </ul>
     <% } %>
     <% if(conversations != null){ %>
-      <ul>
         <li><strong>Conversations:</strong> <%= conversations.size() %> </li>
-      </ul>
     <% } %>
     <% if(messages != null){ %>
-      <ul>
         <li><strong>Messages:</strong> <%= messages.size() %> </li>
-      </ul>
     <% } %>
+    </ul>
   </div>
 </body>
 </html>
