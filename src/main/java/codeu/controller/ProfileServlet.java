@@ -4,13 +4,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-//import codeu.model.data.User;
-//import codeu.model.store.basic.UserStore;
 
 public class ProfileServlet extends HttpServlet
 {
-    /** Store class that gives access to Users. */
-    //private UserStore userStore;
     
     //Forwards the request to the profile.jsp to create the profile page
     @Override
