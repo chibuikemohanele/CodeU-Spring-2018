@@ -51,10 +51,39 @@ public class AdminPageServletTest {
 
   @Test
   public void testDoGet() throws IOException, ServletException {
+    // creating fake conversation list for test with 6 conversations
     List<Conversation> fakeConversationList = new ArrayList<>();
-    fakeConversationList.add(
-        new Conversation(UUID.randomUUID(), UUID.randomUUID(), "test_conversation", Instant.now()));
+    for (int i = 0; i < 6; i++) {
+      UUID convoID = UUID.randomUUID();
+      UUID owner = UUID.randomUUID();
+      String title = "test_conversation_" + Integer.toString(i);
+      Instant creation = Instant.now();
+      fakeConversationList.add(new Conversation(convoID, onwer, title, creation));
+      // creating fake messages list (count: 4) for test, for each conversation
+          List<Message> fakeMessageList = new ArrayList<>();
+          for (int i = 0; i < 4; i++) {
+            UUID msgID = UUID.randomUUID();
+            UUID author = UUID.randomUUID();
+            String content = "fake message!! " + Integer.toString(i) + "for conversation " + Integer.toString(id);
+            Instant creation = Instant.now();
+            fakeMessageList.add(new Message(msgID, convoID, author, content, creation));
+          }
+          Mockito.when(mockMessageStore.getMessagesInConversation(convoID))
+              .thenReturn(fakeMessageList);
+    }
     Mockito.when(mockConversationStore.getAllConversations()).thenReturn(fakeConversationList);
+
+    // creating fake users list for test with 3 users
+    List<User> fakeUsersList = new ArrayList<>();
+    for (int i = 0; i < 3; i++) {
+      // User(UUID id, String name, String passwordHash, Instant creation)
+      UUID userID = UUID.randomUUID();
+      String name = "random_user_" + Integer.toString(i);
+      String passwordHash = "hash" + Integer.toString(i);
+      Instant creation = Instant.now();
+      fakeUsersList.add(new User(userID, name, passwordHash, creation));
+    }
+    Mockito.when(mockUserStore.getAllUsers()).thenReturn(fakeUsersList);
 
     adminServlet.doGet(mockRequest, mockResponse);
     Mockito.verify(mockRequest).setAttribute("conversations", fakeConversationList);
