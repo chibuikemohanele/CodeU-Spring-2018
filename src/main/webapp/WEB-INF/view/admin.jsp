@@ -1,5 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="codeu.model.data.Conversation" %>
+<%@ page import="codeu.model.data.Message" %>
+<%@ page import="codeu.model.data.User" %>
 
 <!DOCTYPE html>
 <html>
@@ -26,12 +28,34 @@
   </nav>
 
   <div id="container">
-
-    <% if(request.getAttribute("error") != null){ %>
+    <%-- If there are errors, tell Admin.  --%>
+    <% if(request.getAttribute("error") != null) { %>
         <h2 style="color:red"><%= request.getAttribute("error") %></h2>
     <% } %>
 
-    <% if(request.getSession().getAttribute("conversations") != null){ %>
+    <%-- Else, display site statistics.  --%>
+    <h1> Administration </h1>
+    <h2> Site Statistics </h2>
+    <%
+    List<Conversation> conversations = (List<Conversation>) request.getAttribute("conversations");
+    List<Message> messages = (List<Message>) request.getAttribute("messages");
+    List<Message> users = (List<User>) request.getAttribute("users");
+    %>
+
+    <% if(users != null){ %>
+      <ul>
+        <li><strong>Users:</strong> <%= users.size() %> </li>
+      </ul>
+    <% } %>
+    <% if(conversations != null){ %>
+      <ul>
+        <li><strong>Conversations:</strong> <%= conversations.size() %> </li>
+      </ul>
+    <% } %>
+    <% if(messages != null){ %>
+      <ul>
+        <li><strong>Messages:</strong> <%= messages.size() %> </li>
+      </ul>
     <% } %>
   </div>
 </body>
