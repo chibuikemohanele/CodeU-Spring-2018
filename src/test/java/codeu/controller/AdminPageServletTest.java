@@ -2,9 +2,15 @@ package codeu.controller;
 
 import codeu.model.data.User;
 import codeu.model.store.basic.UserStore;
+import codeu.model.data.Message;
+import codeu.model.store.basic.MessageStore;
+import codeu.model.data.Conversation;
+import codeu.model.store.basic.ConversationStore;
 import java.io.IOException;
 import java.time.Instant;
 import java.util.UUID;
+import java.util.List;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,7 +23,7 @@ import org.mockito.Mockito;
 
 public class AdminPageServletTest {
 
-  private ChatServlet adminServlet;
+  private AdminServlet adminServlet;
   private HttpServletRequest mockRequest;
   private HttpSession mockSession;
   private HttpServletResponse mockResponse;
@@ -53,25 +59,28 @@ public class AdminPageServletTest {
   public void testDoGet() throws IOException, ServletException {
     // creating fake conversation list for test with 6 conversations
     List<Conversation> fakeConversationList = new ArrayList<>();
+    List<Message> fakeMessageList = new ArrayList<>();
     for (int i = 0; i < 6; i++) {
       UUID convoID = UUID.randomUUID();
       UUID owner = UUID.randomUUID();
       String title = "test_conversation_" + Integer.toString(i);
       Instant creation = Instant.now();
-      fakeConversationList.add(new Conversation(convoID, onwer, title, creation));
+      fakeConversationList.add(new Conversation(convoID, owner, title, creation));
       // creating fake messages list (count: 4) for test, for each conversation
-          List<Message> fakeMessageList = new ArrayList<>();
-          for (int i = 0; i < 4; i++) {
+          List<Message> individualFakeMessageList = new ArrayList<>();
+          for (int j = 0; j < 4; j++) {
             UUID msgID = UUID.randomUUID();
             UUID author = UUID.randomUUID();
-            String content = "fake message!! " + Integer.toString(i) + "for conversation " + Integer.toString(id);
-            Instant creation = Instant.now();
-            fakeMessageList.add(new Message(msgID, convoID, author, content, creation));
+            String content = "fake message!! " + Integer.toString(j) + "for conversation " + Integer.toString(i);
+            Instant messageCreation = Instant.now();
+            fakeMessageList.add(new Message(msgID, convoID, author, content, messageCreation));
           }
+          fakeMessageList.addAll(individualFakeMessageList);
           Mockito.when(mockMessageStore.getMessagesInConversation(convoID))
-              .thenReturn(fakeMessageList);
+              .thenReturn(individualFakeMessageList);
     }
     Mockito.when(mockConversationStore.getAllConversations()).thenReturn(fakeConversationList);
+    Mockito.when(adminServlet.getAllMessages(fakeConversationList)).thenReturn(fakeMessageList);
 
     // creating fake users list for test with 3 users
     List<User> fakeUsersList = new ArrayList<>();
