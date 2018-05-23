@@ -1,6 +1,10 @@
 package codeu.controller;
 
+import codeu.model.data.Conversation;
+import codeu.model.data.Message;
 import codeu.model.data.User;
+import codeu.model.store.basic.ConversationStore;
+import codeu.model.store.basic.MessageStore;
 import codeu.model.store.basic.UserStore;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -35,18 +39,21 @@ public class AdminServlet extends HttpServlet {
     this.userStore = userStore;
   }
 
-  private List<Message> listOfAllMessages(List<Conversation> allCnversations) {
-    List<Message> messages = new List<>();
+  private List<Message> listOfAllMessages(List<Conversation> allConversations) {
+    List<Message> messages = new ArrayList<>();
+    for (Conversation c : allConversations) {
+      messages.addAll(messageStore.getMessagesInConversation(c.getId()));
+    }
     return messages;
   }
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
-        List<Conversation> listOfAllConversations = conversationStore.getAllConversations()
+        List<Conversation> listOfAllConversations = conversationStore.getAllConversations();
         request.setAttribute("conversations", listOfAllConversations);
 
-        List<Message> listOfAllMessages = getAllMessages(listOfAllConversations)
+        List<Message> listOfAllMessages = getAllMessages(listOfAllConversations);
         request.setAttribute("messages", listOfAllMessages);
 
         List<User> listOfAllUsers = userStore.getAllUsers();
