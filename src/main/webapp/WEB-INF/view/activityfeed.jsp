@@ -13,10 +13,13 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 --%>
+<%@ page import="java.util.List" %>
+<%@ page import="codeu.model.data.Conversation" %>
+
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Login</title>
+  <title>Activity Feed</title>
   <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
@@ -31,29 +34,21 @@
       <a href="/login">Login</a>
     <% } %>
     <a href="/about.jsp">About</a>
-    <a href="/profile">Profile</a>
+
   </nav>
 
   <div id="container">
-    <h1>Login</h1>
 
-    <% if(request.getAttribute("error") != null){ %>
-        <h2 style="color:red"><%= request.getAttribute("error") %></h2>
-    <% } %>
+    <h1>Activity Feed</h1>
+    <hr/>
 
-    <form action="/login" method="POST">
-      <label for="username">Username: </label>
-      <br/>
-      <input type="text" name="username" id="username">
-      <br/>
-      <label for="password">Password: </label>
-      <br/>
-      <input type="password" name="password" id="password">
-      <br/><br/>
-      <button type="submit">Login</button>
-    </form>
+    <div style="background-color:Silver">
+      <p><strong>Sat Mar 10 09:39:36 PST 2018: </strong>Ada joined!</p>
+      <p><strong>Sat Mar 10 06:52:56 PST 2018: </strong>Grace sent a message in Programming Chat: "Hey Friends!"</p>
+      <p><strong>Sat Mar 10 04:06:16 PST 2018: </strong>Alan sent a message in Cat Chat: "Yo yo yo!"</p>
+      <p><strong>Sat Mar 10 01:19:36 PST 2018: </strong>Margaret joined!</p>
+    </div>
 
-    <p>New users can register <a href="/register">here</a>.</p>
   </div>
 </body>
 </html>
