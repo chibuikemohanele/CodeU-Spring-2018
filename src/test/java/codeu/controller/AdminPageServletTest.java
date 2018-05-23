@@ -17,19 +17,36 @@ import org.mockito.Mockito;
 
 public class AdminPageServletTest {
 
-  private AdminServlet adminServlet;
+  private ChatServlet adminServlet;
   private HttpServletRequest mockRequest;
+  private HttpSession mockSession;
   private HttpServletResponse mockResponse;
   private RequestDispatcher mockRequestDispatcher;
+  private ConversationStore mockConversationStore;
+  private MessageStore mockMessageStore;
+  private UserStore mockUserStore;
 
   @Before
   public void setup() {
     adminServlet = new AdminServlet();
+
     mockRequest = Mockito.mock(HttpServletRequest.class);
+    mockSession = Mockito.mock(HttpSession.class);
+    Mockito.when(mockRequest.getSession()).thenReturn(mockSession);
+
     mockResponse = Mockito.mock(HttpServletResponse.class);
     mockRequestDispatcher = Mockito.mock(RequestDispatcher.class);
-    Mockito.when(mockRequest.getRequestDispatcher("/WEB-INF/view/admin.jsp"))
+    Mockito.when(mockRequest.getRequestDispatcher("/WEB-INF/view/chat.jsp"))
         .thenReturn(mockRequestDispatcher);
+
+    mockConversationStore = Mockito.mock(ConversationStore.class);
+    chatServlet.setConversationStore(mockConversationStore);
+
+    mockMessageStore = Mockito.mock(MessageStore.class);
+    chatServlet.setMessageStore(mockMessageStore);
+
+    mockUserStore = Mockito.mock(UserStore.class);
+    chatServlet.setUserStore(mockUserStore);
   }
 
   @Test
