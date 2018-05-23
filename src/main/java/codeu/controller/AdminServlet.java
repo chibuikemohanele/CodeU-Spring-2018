@@ -41,7 +41,7 @@ public class AdminServlet extends HttpServlet {
     this.userStore = userStore;
   }
 
-  private List<Message> listOfAllMessages(List<Conversation> allConversations) {
+  private List<Message> getAllMessages(List<Conversation> allConversations) {
     List<Message> messages = new ArrayList<>();
     for (Conversation c : allConversations) {
       messages.addAll(messageStore.getMessagesInConversation(c.getId()));
