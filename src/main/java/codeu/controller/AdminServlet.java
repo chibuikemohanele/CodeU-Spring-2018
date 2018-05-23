@@ -64,9 +64,4 @@ public class AdminServlet extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/view/admin.jsp").forward(request, response);
   }
 
-  // @Override
-  // public void doPost(HttpServletRequest request, HttpServletResponse response)
-  //     throws IOException, ServletException {
-  // }
-
 }
