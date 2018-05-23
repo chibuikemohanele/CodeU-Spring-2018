@@ -23,8 +23,7 @@
 
     <% if(request.getSession().getAttribute("user") != null){ %>
       <h1>About Me</h1>
-      <!-- <input type="text" name="textbox1" size="40"> -->
-      <textarea name="message" id="message" style="height: 200px; width: 1100px;"     onclick="this.value=''">Enter text here...</textarea>
+      <textarea name="message" id="message" style="height: 200px; width: 200px;"     onclick="this.value=''">Enter text here...</textarea>
     <% } %>
   </div>
 </body>
