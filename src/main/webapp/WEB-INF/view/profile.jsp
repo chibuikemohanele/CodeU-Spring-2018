@@ -20,21 +20,10 @@
 
   <div id="container">
     <h1>Profile</h1>
-    <h2>This is your profile.</h2>
-
 
     <% if(request.getSession().getAttribute("user") != null){ %>
-      <h1>About Me/h1>
-      <form action="/profile" method="POST">
-          <div class="form-group">
-            <label class="form-control-label">Title:</label>
-          <input type="text" name="Edit">
-        </div>
-
-        <button type="submit">Create</button>
-      </form>
-
-      <hr/>
+      <h1>About Me</h1>
+      <input type="text" name="textbox1" size="40">
     <% } %>
   </div>
 </body>
