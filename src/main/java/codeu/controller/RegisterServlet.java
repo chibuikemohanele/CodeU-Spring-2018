@@ -66,18 +66,9 @@ public class RegisterServlet extends HttpServlet {
 
     User user = new User(UUID.randomUUID(), username, hashedPassword, Instant.now());
 
-    // ALSO PROBLEMATIC
-    // request.setAttribute("newTempUser", user);
-    // request.getRequestDispatcher("/WEB-INF/view/activityfeed.jsp").forward(request, response);
-
     userStore.addUser(user);
 
     response.sendRedirect("/login");
-
-    // PROBLEMATIC IDK WHY
-    // request.setAttribute("newUser", user);
-    // request.getRequestDispatcher("ActivityFeedServlet").forward(request, response);
-
 
   }
 }

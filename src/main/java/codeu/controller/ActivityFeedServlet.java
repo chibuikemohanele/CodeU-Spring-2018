@@ -95,7 +95,7 @@ public class ActivityFeedServlet extends HttpServlet {
 
       // get convo info 
       List<Conversation> conversations = conversationStore.getAllConversations();
-      newUsers.add((User)request.getAttribute("newUser") );
+      List<User> newUsers = userStore.getAllUsers();
 
       // recieve new convo from convo servlet
       request.setAttribute("conversations", conversations);

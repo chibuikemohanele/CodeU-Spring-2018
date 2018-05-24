@@ -55,19 +55,7 @@
 
       <!-- USER REGISTERED -->
       <h3>New Users</h3>
-
-        <%
-        // pull new user
-        User tempUser = (User)request.getAttribute("newTempUser");
-        %>
-        <ul class="mdl-list">
-          <li>
-           <strong> <%= tempUser.getCreationTime() %>: </strong> 
-            <%= tempUser.getName() %> joined!
-          </li> 
-        </ul>
-
-     <!-- <%
+     <%
       // Pull user data
       List<User> newUsers = (List<User>) request.getAttribute("newUsers");
       ListIterator<User> itrU = newUsers.listIterator(newUsers.size());
@@ -95,15 +83,7 @@
         </ul>
       <%
       }
-      %> -->
-
-
-
-
-
-
-
-
+      %>
 
 
       <!-- CONVERSATION CREATION -->
