@@ -16,6 +16,9 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ListIterator" %>
 <%@ page import="codeu.model.data.Conversation" %>
+<%@ page import="codeu.model.data.User" %>
+<%@ page import="codeu.model.store.basic.UserStore" %>
+
 
 <!DOCTYPE html>
 <html>
@@ -50,6 +53,10 @@
               - Users sending messages -- Blahblah sent a message to Convo 17: Yoyo! -->
 
 
+      <!-- USER REGISTERED -->
+      <h3>New Users</h3>
+
+
       <!-- CONVERSATION CREATION -->
       <h3>New Conversations</h3>
      
@@ -57,6 +64,7 @@
       // Pull conversation data
       List<Conversation> conversations = (List<Conversation>) request.getAttribute("conversations");
       ListIterator<Conversation> itr = conversations.listIterator(conversations.size());
+      UserStore allUsers = (UserStore) request.getAttribute("users");
 
       // empty?
       if(conversations == null || conversations.isEmpty()){
@@ -73,7 +81,7 @@
       %>
         <li>
           <strong> <%= currConvo.getCreationTime() %>: </strong> 
-          <%= currConvo.getOwnerId() %> created a new conversation: 
+          <%= (allUsers.getUser(currConvo.getOwnerId())).getName() %> created a new conversation: 
           <a href="/chat/<%= currConvo.getTitle() %>"> <%= currConvo.getTitle() %></a>
         </li> 
       <%
@@ -84,34 +92,13 @@
       }
       %>
 
+      <!-- NEW MESSAGES -->
+      <h3>New Messages</h3>
+     
+
     </div>
 
 
-    <!-- Plan: Will categorize all relevant recent events to make sure pulling properly -->
-
-    <!-- USER REGISTERED 
-      --
-      --
-      --
-      --
-      --
-      --
-      --
-      --
-      --
-      -->
-
-    <!-- USERS SENDING MESSAGES 
-      --
-      --
-      --
-      --
-      --
-      --
-      --
-      --
-      --
-      -->
 
   </div>
 </body>

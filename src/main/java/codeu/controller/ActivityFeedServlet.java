@@ -92,6 +92,7 @@ public class ActivityFeedServlet extends HttpServlet {
 
       // recieve new convo from convo servlet
       request.setAttribute("conversations", conversations);
+      request.setAttribute("users", userStore);
 
       request.getRequestDispatcher("/WEB-INF/view/activityfeed.jsp").forward(request, response);
  
