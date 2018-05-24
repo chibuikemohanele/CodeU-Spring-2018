@@ -56,6 +56,55 @@
       <!-- USER REGISTERED -->
       <h3>New Users</h3>
 
+        <%
+        // pull new user
+        User tempUser = (User)request.getAttribute("newTempUser");
+        %>
+        <ul class="mdl-list">
+          <li>
+           <strong> <%= tempUser.getCreationTime() %>: </strong> 
+            <%= tempUser.getName() %> joined!
+          </li> 
+        </ul>
+
+     <!-- <%
+      // Pull user data
+      List<User> newUsers = (List<User>) request.getAttribute("newUsers");
+      ListIterator<User> itrU = newUsers.listIterator(newUsers.size());
+
+      // empty?
+      if(newUsers == null || newUsers.isEmpty()){
+      %>
+        <p>No New Users.</p>
+      <%
+      }
+      else{ // not empty? make a list
+      %>
+        <ul class="mdl-list">
+      <%
+        while(itrU.hasPrevious()){
+          User currUser = itrU.previous();
+      %>
+        <li>
+          <strong> <%= currUser.getCreationTime() %>: </strong> 
+          <%= currUser.getName() %> joined!
+        </li> 
+      <%
+        }
+      %>
+        </ul>
+      <%
+      }
+      %> -->
+
+
+
+
+
+
+
+
+
 
       <!-- CONVERSATION CREATION -->
       <h3>New Conversations</h3>
@@ -63,7 +112,7 @@
       <%
       // Pull conversation data
       List<Conversation> conversations = (List<Conversation>) request.getAttribute("conversations");
-      ListIterator<Conversation> itr = conversations.listIterator(conversations.size());
+      ListIterator<Conversation> itrC = conversations.listIterator(conversations.size());
       UserStore allUsers = (UserStore) request.getAttribute("users");
 
       // empty?
@@ -76,8 +125,8 @@
       %>
         <ul class="mdl-list">
       <%
-        while(itr.hasPrevious()){
-          Conversation currConvo = itr.previous();
+        while(itrC.hasPrevious()){
+          Conversation currConvo = itrC.previous();
       %>
         <li>
           <strong> <%= currConvo.getCreationTime() %>: </strong> 

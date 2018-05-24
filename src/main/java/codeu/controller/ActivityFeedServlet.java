@@ -23,6 +23,7 @@ import codeu.model.store.basic.UserStore;
 import java.io.IOException;
 import java.time.Instant;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.UUID;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -43,6 +44,9 @@ public class ActivityFeedServlet extends HttpServlet {
   /** Store class that gives access to Conversations. */
   private ConversationStore conversationStore;
 
+  private List<User> newUsers; 
+
+
   /**
    * Set up state for handling login-related requests. This method is only called when running in a
    * server, not when running in a test.
@@ -53,6 +57,8 @@ public class ActivityFeedServlet extends HttpServlet {
     setConversationStore(ConversationStore.getInstance());
     setMessageStore(MessageStore.getInstance());
     setUserStore(UserStore.getInstance());
+
+    this.newUsers = new ArrayList<User>();
   }
 
   /**
@@ -89,10 +95,12 @@ public class ActivityFeedServlet extends HttpServlet {
 
       // get convo info 
       List<Conversation> conversations = conversationStore.getAllConversations();
+      newUsers.add((User)request.getAttribute("newUser") );
 
       // recieve new convo from convo servlet
       request.setAttribute("conversations", conversations);
       request.setAttribute("users", userStore);
+      request.setAttribute("newUsers", newUsers);
 
       request.getRequestDispatcher("/WEB-INF/view/activityfeed.jsp").forward(request, response);
  
