@@ -13,6 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 --%>
+<%@ page import="java.time.Instant" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ListIterator" %>
 <%@ page import="codeu.model.data.Conversation" %>
@@ -77,7 +78,7 @@
             User currUser = itrU.previous();
         %>
           <li>
-            <strong> <%= currUser.getCreationTime() %>: </strong> 
+            <strong> <%= (currUser.getCreationTime()) %>: </strong> 
             <%= currUser.getName() %> joined! 
           </li> 
         <%
@@ -113,7 +114,7 @@
           Conversation currConvo = itrC.previous();
       %>
         <li>
-          <strong> <%= currConvo.getCreationTime() %>: </strong> 
+          <strong> <%= (currConvo.getCreationTime()) %>: </strong> 
           <%= (userStore.getUser(currConvo.getOwnerId())).getName() %> created a new conversation: 
           <a href="/chat/<%= currConvo.getTitle() %>"> <%= currConvo.getTitle() %></a>
         </li> 
@@ -147,7 +148,7 @@
           Message currMessage = itrM.previous();
       %>
         <li>
-          <strong> <%= currMessage.getCreationTime() %>: </strong> 
+          <strong> <%= (currMessage.getCreationTime()) %>: </strong> 
           <%= (userStore.getUser(currMessage.getAuthorId())).getName() %> sent a message in 
           <a href="/chat/<%= (convoStore.getConvoWithID(currMessage.getConversationId())).getTitle() %>"> <%= (convoStore.getConvoWithID(currMessage.getConversationId())).getTitle() %></a>
           : "<%= currMessage.getContent() %>"
