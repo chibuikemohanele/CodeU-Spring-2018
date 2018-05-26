@@ -26,7 +26,11 @@
       document.getElementById("Display").innerHTML = text
     }
   </script>
-
+  <style>
+    #Display{
+      margin-left:8px;
+    }
+  </style>
   <div id="container">
     <h1>Profile</h1>
 
