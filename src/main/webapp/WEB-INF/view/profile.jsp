@@ -19,6 +19,14 @@
     <a href="/profile">Profile</a>
   </nav>
 
+  <script type="text/javascript">
+    function getDisplay()
+    {
+      var text = document.getElementById("message").value;
+      document.getElementById("Display").innerHTML = "About Me" + about;
+    }
+  </script>
+
   <div id="container">
     <h1>Profile</h1>
 
@@ -27,6 +35,9 @@
       <textarea name="message" id="message" style="height: 200px; width: 350px;"     onclick="this.value=''">Enter text here...</textarea>
       <button>Post</button>
     <% } %>
+  </div>
+  <div>
+    <div id="Display">
   </div>
 </body>
 </html>
