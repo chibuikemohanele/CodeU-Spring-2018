@@ -26,7 +26,7 @@
       document.getElementById("Display").innerHTML = text
     }
   </script>
-  <div align="center">
+  <div align="justify">
   <div id="container">
     <h1>Profile</h1>
 
