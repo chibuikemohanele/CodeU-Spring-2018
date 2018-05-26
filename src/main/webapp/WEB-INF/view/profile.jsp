@@ -33,7 +33,7 @@
     <% if(request.getSession().getAttribute("user") != null){ %>
       <h1>About Me</h1>
       <textarea name="message" id="message" style="height: 200px; width: 350px;"     onclick="this.value=''">Enter text here...</textarea>
-      <button onclick= "getDisplay(document.message.value)">Post</button>
+      <button onclick= "getDisplay(document.container.message.value)">Post</button>
     <% } %>
   </div>
   <div>
