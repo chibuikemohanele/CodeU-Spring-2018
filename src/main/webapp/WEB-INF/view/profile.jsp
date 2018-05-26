@@ -26,11 +26,7 @@
       document.getElementById("Display").innerHTML = text
     }
   </script>
-  <style>
-    #Display{
-      margin-left:8px;
-    }
-  </style>
+  <div align="center">
   <div id="container">
     <h1>Profile</h1>
 
@@ -40,8 +36,8 @@
       <button onclick= "getDisplay(document.getElementById('message').value)">Post</button>
     <% } %>
   </div>
-  <div>
     <div id="Display">
+  </div>
   </div>
 </body>
 </html>
