@@ -14,7 +14,11 @@
   limitations under the License.
 --%>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.ListIterator" %>
 <%@ page import="codeu.model.data.Conversation" %>
+<%@ page import="codeu.model.data.User" %>
+<%@ page import="codeu.model.store.basic.UserStore" %>
+
 
 <!DOCTYPE html>
 <html>
@@ -43,11 +47,87 @@
     <hr/>
 
     <div style="background-color:Silver">
-      <p><strong>Sat Mar 10 09:39:36 PST 2018: </strong>Ada joined!</p>
-      <p><strong>Sat Mar 10 06:52:56 PST 2018: </strong>Grace sent a message in Programming Chat: "Hey Friends!"</p>
-      <p><strong>Sat Mar 10 04:06:16 PST 2018: </strong>Alan sent a message in Cat Chat: "Yo yo yo!"</p>
-      <p><strong>Sat Mar 10 01:19:36 PST 2018: </strong>Margaret joined!</p>
+      <!-- Add to activity feed when:
+              - Users register -- "blahblah joined!" 
+              - Users creating conversations -- "blahblah created a new conversation: Convo17"
+              - Users sending messages -- Blahblah sent a message to Convo 17: Yoyo! -->
+
+
+      <!-- USER REGISTERED -->
+      <h3>New Users</h3>
+     <%
+      // Pull user data
+      List<User> newUsers = (List<User>) request.getAttribute("newUsers");
+      ListIterator<User> itrU = newUsers.listIterator(newUsers.size());
+
+      // empty?
+      if(newUsers == null || newUsers.isEmpty()){
+      %>
+        <p>No New Users.</p>
+      <%
+      }
+      else{ // not empty? make a list
+      %>
+        <ul class="mdl-list">
+      <%
+        while(itrU.hasPrevious()){
+          User currUser = itrU.previous();
+      %>
+        <li>
+          <strong> <%= currUser.getCreationTime() %>: </strong> 
+          <%= currUser.getName() %> joined!
+        </li> 
+      <%
+        }
+      %>
+        </ul>
+      <%
+      }
+      %>
+
+
+      <!-- CONVERSATION CREATION -->
+      <h3>New Conversations</h3>
+     
+      <%
+      // Pull conversation data
+      List<Conversation> conversations = (List<Conversation>) request.getAttribute("conversations");
+      ListIterator<Conversation> itrC = conversations.listIterator(conversations.size());
+      UserStore allUsers = (UserStore) request.getAttribute("users");
+
+      // empty?
+      if(conversations == null || conversations.isEmpty()){
+      %>
+        <p>No New Conversations.</p>
+      <%
+      }
+      else{ // not empty? make a list
+      %>
+        <ul class="mdl-list">
+      <%
+        while(itrC.hasPrevious()){
+          Conversation currConvo = itrC.previous();
+      %>
+        <li>
+          <strong> <%= currConvo.getCreationTime() %>: </strong> 
+          <%= (allUsers.getUser(currConvo.getOwnerId())).getName() %> created a new conversation: 
+          <a href="/chat/<%= currConvo.getTitle() %>"> <%= currConvo.getTitle() %></a>
+        </li> 
+      <%
+        }
+      %>
+        </ul>
+      <%
+      }
+      %>
+
+      <!-- NEW MESSAGES -->
+      <h3>New Messages</h3>
+     
+
     </div>
+
+
 
   </div>
 </body>

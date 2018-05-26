@@ -113,6 +113,7 @@ public class ConversationServlet extends HttpServlet {
       return;
     }
 
+    // New conversation created 
     Conversation conversation =
         new Conversation(UUID.randomUUID(), user.getId(), conversationTitle, Instant.now());
 
