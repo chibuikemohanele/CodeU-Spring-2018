@@ -17,7 +17,9 @@
 <%@ page import="java.util.ListIterator" %>
 <%@ page import="codeu.model.data.Conversation" %>
 <%@ page import="codeu.model.data.User" %>
+<%@ page import="codeu.model.data.Message" %>
 <%@ page import="codeu.model.store.basic.UserStore" %>
+<%@ page import="codeu.model.store.basic.ConversationStore" %>
 
 
 <!DOCTYPE html>
@@ -56,54 +58,35 @@
       <!-- USER REGISTERED -->
       <h3>New Users</h3>
 
-        <%
-        // pull new user
-        User tempUser = (User)request.getAttribute("newTempUser");
+      <%
+        UserStore userStore = (UserStore) request.getAttribute("users");
+        List<User> users = userStore.getLatestUsers();
+        ListIterator<User> itrU = users.listIterator(users.size());
+      
+        // empty?
+        if(users == null || users.isEmpty()){
         %>
-        <ul class="mdl-list">
-          <li>
-           <strong> <%= tempUser.getCreationTime() %>: </strong> 
-            <%= tempUser.getName() %> joined!
-          </li> 
-        </ul>
-
-     <!-- <%
-      // Pull user data
-      List<User> newUsers = (List<User>) request.getAttribute("newUsers");
-      ListIterator<User> itrU = newUsers.listIterator(newUsers.size());
-
-      // empty?
-      if(newUsers == null || newUsers.isEmpty()){
-      %>
-        <p>No New Users.</p>
-      <%
-      }
-      else{ // not empty? make a list
-      %>
-        <ul class="mdl-list">
-      <%
-        while(itrU.hasPrevious()){
-          User currUser = itrU.previous();
-      %>
-        <li>
-          <strong> <%= currUser.getCreationTime() %>: </strong> 
-          <%= currUser.getName() %> joined!
-        </li> 
-      <%
+          <p>No New Users.</p>
+        <%
         }
-      %>
-        </ul>
-      <%
-      }
-      %> -->
-
-
-
-
-
-
-
-
+        else{ // not empty? make a list
+        %>
+          <ul class="mdl-list">
+        <%
+          while(itrU.hasPrevious()){
+            User currUser = itrU.previous();
+        %>
+          <li>
+            <strong> <%= currUser.getCreationTime() %>: </strong> 
+            <%= currUser.getName() %> joined! 
+          </li> 
+        <%
+          }
+        %>
+          </ul>
+        <%
+        }
+        %>
 
 
       <!-- CONVERSATION CREATION -->
@@ -111,9 +94,10 @@
      
       <%
       // Pull conversation data
-      List<Conversation> conversations = (List<Conversation>) request.getAttribute("conversations");
+      ConversationStore convoStore = (ConversationStore) request.getAttribute("conversations");
+      List<Conversation> conversations = (List<Conversation>) convoStore.getLatestConversations();
       ListIterator<Conversation> itrC = conversations.listIterator(conversations.size());
-      UserStore allUsers = (UserStore) request.getAttribute("users");
+
 
       // empty?
       if(conversations == null || conversations.isEmpty()){
@@ -130,7 +114,7 @@
       %>
         <li>
           <strong> <%= currConvo.getCreationTime() %>: </strong> 
-          <%= (allUsers.getUser(currConvo.getOwnerId())).getName() %> created a new conversation: 
+          <%= (userStore.getUser(currConvo.getOwnerId())).getName() %> created a new conversation: 
           <a href="/chat/<%= currConvo.getTitle() %>"> <%= currConvo.getTitle() %></a>
         </li> 
       <%
@@ -143,7 +127,38 @@
 
       <!-- NEW MESSAGES -->
       <h3>New Messages</h3>
-     
+           <%
+      // Pull conversation data
+      List<Message> messages = (List<Message>) request.getAttribute("messages");
+      ListIterator<Message> itrM = messages.listIterator(messages.size());
+
+
+      // empty?
+      if(messages == null || messages.isEmpty()){
+      %>
+        <p>No New Conversations.</p>
+      <%
+      }
+      else{ // not empty? make a list
+      %>
+        <ul class="mdl-list">
+      <%
+        while(itrM.hasPrevious()){
+          Message currMessage = itrM.previous();
+      %>
+        <li>
+          <strong> <%= currMessage.getCreationTime() %>: </strong> 
+          <%= (userStore.getUser(currMessage.getAuthorId())).getName() %> sent a message in 
+          <a href="/chat/<%= (convoStore.getConvoWithID(currMessage.getConversationId())).getTitle() %>"> <%= (convoStore.getConvoWithID(currMessage.getConversationId())).getTitle() %></a>
+          : "<%= currMessage.getContent() %>"
+        </li> 
+      <%
+        }
+      %>
+        </ul>
+      <%
+      }
+      %>
 
     </div>
 

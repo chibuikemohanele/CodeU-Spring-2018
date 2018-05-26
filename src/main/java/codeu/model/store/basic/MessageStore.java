@@ -89,4 +89,9 @@ public class MessageStore {
   public void setMessages(List<Message> messages) {
     this.messages = messages;
   }
+
+    // latest
+  public List<Message> getLatestMessages() {
+    return messages; // all for now
+  }
 }
