@@ -57,11 +57,12 @@
       <h3>New Users</h3>
      <%
       // Pull user data
-      List<User> newUsers = (List<User>) request.getAttribute("newUsers");
-      ListIterator<User> itrU = newUsers.listIterator(newUsers.size());
+      UserStore userStore = (UserStore) request.getAttribute("users");
+      List<User> users = (List<User>) userStore.getAllUsers();
+      ListIterator<User> itrU = users.listIterator(users.size());
 
       // empty?
-      if(newUsers == null || newUsers.isEmpty()){
+      if(users == null || users.isEmpty()){
       %>
         <p>No New Users.</p>
       <%
@@ -92,8 +93,8 @@
       <%
       // Pull conversation data
       List<Conversation> conversations = (List<Conversation>) request.getAttribute("conversations");
+
       ListIterator<Conversation> itrC = conversations.listIterator(conversations.size());
-      UserStore allUsers = (UserStore) request.getAttribute("users");
 
       // empty?
       if(conversations == null || conversations.isEmpty()){
@@ -110,7 +111,7 @@
       %>
         <li>
           <strong> <%= currConvo.getCreationTime() %>: </strong> 
-          <%= (allUsers.getUser(currConvo.getOwnerId())).getName() %> created a new conversation: 
+          <%= (userStore.getUser(currConvo.getOwnerId())).getName() %> created a new conversation: 
           <a href="/chat/<%= currConvo.getTitle() %>"> <%= currConvo.getTitle() %></a>
         </li> 
       <%
@@ -124,6 +125,7 @@
       <!-- NEW MESSAGES -->
       <h3>New Messages</h3>
      
+
 
     </div>
 

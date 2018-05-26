@@ -70,5 +70,8 @@ public class RegisterServlet extends HttpServlet {
 
     response.sendRedirect("/login");
 
+    // request.setAttribute("newUser", user);
+    // request.getRequestDispatcher("activityfeed.jsp").forward(request, response);
+
   }
 }

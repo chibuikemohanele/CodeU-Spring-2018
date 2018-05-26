@@ -95,12 +95,11 @@ public class ActivityFeedServlet extends HttpServlet {
 
       // get convo info 
       List<Conversation> conversations = conversationStore.getAllConversations();
-      List<User> newUsers = userStore.getAllUsers();
+      UserStore users = userStore;
 
       // recieve new convo from convo servlet
       request.setAttribute("conversations", conversations);
-      request.setAttribute("users", userStore);
-      request.setAttribute("newUsers", newUsers);
+      request.setAttribute("users", users);
 
       request.getRequestDispatcher("/WEB-INF/view/activityfeed.jsp").forward(request, response);
  
