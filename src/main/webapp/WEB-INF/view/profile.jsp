@@ -22,7 +22,7 @@
   <script type="text/javascript">
     function getDisplay()
     {
-      var text = document.getElementById("message").value;
+      var about = document.getElementById("message").value;
       document.getElementById("Display").innerHTML = "About Me" + about;
     }
   </script>
@@ -32,8 +32,8 @@
 
     <% if(request.getSession().getAttribute("user") != null){ %>
       <h1>About Me</h1>
-      <textarea name="message" id="message" style="height: 200px; width: 350px;"     onclick="this.value=''">Enter text here...</textarea>
-      <button onclick= "getDisplay()" >Post</button>
+      <input type= "text" name="message" id="message" style="height: 200px; width: 350px;"     onclick="this.value=''">Enter text here...>
+      <button onclick= "getDisplay()">Save Changes</button>
     <% } %>
   </div>
   <div>
