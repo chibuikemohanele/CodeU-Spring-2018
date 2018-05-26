@@ -20,10 +20,10 @@
   </nav>
 
   <script type="text/javascript">
-    function getDisplay()
+    function getDisplay(text)
     {
-      var about = document.getElementById("message").value;
-      document.getElementById("Display").innerHTML = "About Me" + about;
+      //var text = document.getElementById("message").value;
+      document.getElementById("Display").innerHTML = text
     }
   </script>
 
@@ -32,8 +32,8 @@
 
     <% if(request.getSession().getAttribute("user") != null){ %>
       <h1>About Me</h1>
-      <input type= "text" name="message" id="message" style="height: 200px; width: 350px;"     onclick="this.value=''">Enter text here...>
-      <button onclick= "getDisplay()">Save Changes</button>
+      <textarea name="message" id="message" style="height: 200px; width: 350px;"     onclick="this.value=''">Enter text here...</textarea>
+      <button onclick= "getDisplay(document.message.value)">Post</button>
     <% } %>
   </div>
   <div>
