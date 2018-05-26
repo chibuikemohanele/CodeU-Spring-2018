@@ -126,14 +126,5 @@ public class UserStore {
   public void setUsers(List<User> users) {
     this.users = users;
   }
-
-  /**
-  * Experimental: most likely will remove
-  * Return list of all users
-  */
-  public List<User> getAllUsers() {
-    return users;
-  }
-
 }
 
