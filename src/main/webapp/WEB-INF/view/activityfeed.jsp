@@ -13,6 +13,9 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 --%>
+
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
 <%@ page import="java.time.Instant" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ListIterator" %>
@@ -53,7 +56,12 @@
       <!-- Add to activity feed when:
               - Users register -- "blahblah joined!" 
               - Users creating conversations -- "blahblah created a new conversation: Convo17"
-              - Users sending messages -- Blahblah sent a message to Convo 17: Yoyo! -->
+              - Users sending messages -- Blahblah sent a message to Convo 17: Yoyo! 
+
+
+          2018-05-27T07:59:37.961535Z TO Sat Mar 10 09:39:36 PST 2018
+
+      -->
 
 
       <!-- USER REGISTERED -->
@@ -63,7 +71,9 @@
         UserStore userStore = (UserStore) request.getAttribute("users");
         List<User> users = userStore.getLatestUsers();
         ListIterator<User> itrU = users.listIterator(users.size());
-      
+        // example: Sat Mar 10 09:39:36 PST 2018
+        SimpleDateFormat formatter = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
+        
         // empty?
         if(users == null || users.isEmpty()){
         %>
@@ -76,9 +86,11 @@
         <%
           while(itrU.hasPrevious()){
             User currUser = itrU.previous();
+            Date myDate = Date.from(currUser.getCreationTime());
+            String formattedDate = formatter.format(myDate);
         %>
           <li>
-            <strong> <%= (currUser.getCreationTime()) %>: </strong> 
+            <strong> <%= formattedDate %>: </strong> 
             <%= currUser.getName() %> joined! 
           </li> 
         <%
@@ -112,9 +124,11 @@
       <%
         while(itrC.hasPrevious()){
           Conversation currConvo = itrC.previous();
+          Date myDate = Date.from(currConvo.getCreationTime());
+          String formattedDate = formatter.format(myDate);
       %>
         <li>
-          <strong> <%= (currConvo.getCreationTime()) %>: </strong> 
+          <strong> <%= formattedDate %>: </strong> 
           <%= (userStore.getUser(currConvo.getOwnerId())).getName() %> created a new conversation: 
           <a href="/chat/<%= currConvo.getTitle() %>"> <%= currConvo.getTitle() %></a>
         </li> 
@@ -146,9 +160,11 @@
       <%
         while(itrM.hasPrevious()){
           Message currMessage = itrM.previous();
+          Date myDate = Date.from(currMessage.getCreationTime());
+          String formattedDate = formatter.format(myDate);
       %>
         <li>
-          <strong> <%= (currMessage.getCreationTime()) %>: </strong> 
+          <strong> <%= formattedDate %>: </strong> 
           <%= (userStore.getUser(currMessage.getAuthorId())).getName() %> sent a message in 
           <a href="/chat/<%= (convoStore.getConvoWithID(currMessage.getConversationId())).getTitle() %>"> <%= (convoStore.getConvoWithID(currMessage.getConversationId())).getTitle() %></a>
           : "<%= currMessage.getContent() %>"
