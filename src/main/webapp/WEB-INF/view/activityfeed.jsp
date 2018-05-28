@@ -129,7 +129,7 @@
 
 
 
-          // SORT 
+          // SORT MASTER LIST BASED ON TIMESTAMP
           Arrays.sort(masterList, new java.util.Comparator<String[]>() {
                public int compare(String[] a, String[] b) {
                    
@@ -153,13 +153,17 @@
     <div style="background-color:Silver">
 
       <% 
+          // DATE FORMAT
           SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
+          
+          // Iterate through master list
           for (int x = 0; x < totalSize; x++) {
 
                 Instant ins = Instant.parse(masterList[x][0]);
                 Date myDate = Date.from(ins);
                 String formattedDate = sdf.format(myDate);
 
+                // Conversations
                 if (masterList[x][1] == "c") {
                 %>
 
@@ -170,8 +174,11 @@
                   </li> 
 
                 <%
-              } else if (masterList[x][1] == "u") {
-               %>
+
+                // Users
+                } else if (masterList[x][1] == "u") {
+              
+                %>
 
                   <li>
                    <strong> <%= formattedDate %>: </strong>
@@ -179,7 +186,10 @@
                   </li> 
 
                 <%
-              } else if (masterList[x][1] == "m") {
+
+                // Messages
+                } else if (masterList[x][1] == "m") {
+                
                 %>
 
                   <li>
