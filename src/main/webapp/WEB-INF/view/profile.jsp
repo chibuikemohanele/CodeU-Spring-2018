@@ -24,12 +24,13 @@
 
     <% if(request.getSession().getAttribute("user") != null){ %>
       <form action ="/profile" method="POST">
-        <textarea name="About Me" rows="10" col="40">
+        <textarea name="About Me" rows="40" col="40">
           Enter info about yourself here:
         </textarea>
         <br>
-        <input type="submit">
+        <input type="Submit">
        </form>
+       <p> (User)request.getSession().getAttribute("user").getAboutMe()</p>
     <% } %>
   </div>
 </body>
