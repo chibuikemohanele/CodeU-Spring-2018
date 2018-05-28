@@ -30,7 +30,7 @@
         <br>
         <input type="Submit">
        </form>
-       <p> (User)request.getSession().getAttribute("user").getAboutMe()</p>
+       <p> <%(User)request.getSession().getAttribute("user").getAboutMe() %> /p>
     <% } %>
   </div>
 </body>
