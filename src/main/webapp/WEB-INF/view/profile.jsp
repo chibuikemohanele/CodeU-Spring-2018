@@ -19,21 +19,10 @@
     <a href="/profile">Profile</a>
   </nav>
 
-  <!-- <script type="text/javascript">
-    function getDisplay(text)
-    {
-      //var text = document.getElementById("message").value;
-      document.getElementById("Display").innerHTML = text
-    }
-  </script> -->
-  <div align="justify">
   <div id="container">
     <h1>Profile</h1>
 
     <% if(request.getSession().getAttribute("user") != null){ %>
-      <!-- <h1>About Me</h1>
-      <textarea name="message" id="message" style="height: 200px; width: 350px;"     onclick="this.value=''">Enter text here...</textarea>
-      <button onclick= "getDisplay(document.getElementById('message').value)">Post</button> -->
       <form action ="/profile" method="POST">
         <textarea name="About Me" rows="10" col="40">
           Enter info about yourself here:
@@ -42,9 +31,6 @@
         <input type="submit">
        </form>
     <% } %>
-  </div>
-    <!-- <div id="Display">
-  </div> -->
   </div>
 </body>
 </html>
