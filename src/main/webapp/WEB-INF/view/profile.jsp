@@ -1,7 +1,7 @@
 --%>
 <%@ page import="codeu.model.store.basic.UserStore" %>
 <%
-UserStore userStore = new UserStore;
+private UserStore userStore;
 %>
 
 <!DOCTYPE html>
