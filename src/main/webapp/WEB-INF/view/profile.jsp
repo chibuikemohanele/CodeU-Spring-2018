@@ -1,3 +1,9 @@
+--%>
+<%@ page import="codeu.model.store.basic.UserStore" %>
+<%
+UserStore userStore = new UserStore;
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,7 +36,7 @@
         <br>
         <input type="Submit">
        </form>
-       <p> <%(User)request.getSession().getAttribute("user").getAboutMe() %> /p>
+       <p> <% userStore.getUser((String)request.getSession().getAttribute("user")).getAboutMe() %> /p>
     <% } %>
   </div>
 </body>

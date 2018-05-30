@@ -5,10 +5,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import codeu.model.data.User;
+import codeu.model.store.basic.UserStore;
 
 public class ProfileServlet extends HttpServlet
 {
     private User user;
+    private UserStore userStore;;
 
     //Forwards the request to the profile.jsp to create the profile page
     @Override
@@ -32,13 +34,13 @@ public class ProfileServlet extends HttpServlet
     public void doPost(HttpServletRequest request, HttpServletResponse response)
     throws IOException, ServletException 
     {
-        user = (User) request.getSession().getAttribute("user");
+        String username = (String) request.getSession().getAttribute("user");
+        user = userStore.getUser(username);
 
         if (request.getSession().getAttribute("user") != null) 
         {
             String aboutMe = request.getParameter("About me");
             user.setAboutMe(aboutMe);
-            response.sendRedirect("/profile");
         }
     }
 
