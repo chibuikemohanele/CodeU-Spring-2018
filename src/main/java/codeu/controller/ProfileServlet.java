@@ -39,7 +39,7 @@ public class ProfileServlet extends HttpServlet
 
         if (request.getSession().getAttribute("user") != null) 
         {
-            String aboutMe = request.getParameter("About me");
+            String aboutMe = request.getParameter("About Me");
             user.setAboutMe(aboutMe);
             UserStore.getInstance().updateUser(user);
             response.sendRedirect("/profile");
