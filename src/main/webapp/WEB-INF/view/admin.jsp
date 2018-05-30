@@ -36,6 +36,7 @@
     <%-- Else, display site statistics.  --%>
     <h1> Administration </h1>
     <h2> Site Statistics </h2>
+    <p> Here are some site statistics
     <%
     List<Conversation> conversations = (List<Conversation>) request.getAttribute("conversations");
     List<Message> messages = (List<Message>) request.getAttribute("messages");
