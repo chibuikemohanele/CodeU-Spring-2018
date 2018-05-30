@@ -14,14 +14,11 @@
 
 package codeu.controller;
 
-// import java.io.IOException;
-// import javax.servlet.ServletException;
-// import javax.servlet.http.HttpServlet;
-// import javax.servlet.http.HttpServletRequest;
-// import javax.servlet.http.HttpServletResponse;
-import java.io.*;
-import javax.servlet.*;
-import javax.servlet.http.*;
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 
 /** Servlet class responsible for the login page. */
@@ -44,18 +41,9 @@ public class ActivityFeedServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
-      // // Set response content type
-      // response.setContentType("text/html");
-
-      // // Actual logic goes here.
-      // PrintWriter out = response.getWriter();
-      // out.println("<h1>" + message + "</h1>");
 
       request.getRequestDispatcher("/WEB-INF/view/activityfeed.jsp").forward(request, response);
-  }
-
-  public void destroy() {
-    // do nothing
+ 
   }
 
 }
