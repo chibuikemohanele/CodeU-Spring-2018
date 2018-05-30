@@ -1,7 +1,5 @@
 --%>
 <%@ page import="codeu.model.store.basic.UserStore" %>
-<%
-private UserStore userStore;
 %>
 
 <!DOCTYPE html>
@@ -36,7 +34,7 @@ private UserStore userStore;
         <br>
         <input type="Submit">
        </form>
-       <p> <% userStore.getUser((String)request.getSession().getAttribute("user")).getAboutMe() %> /p>
+       <p> <% userStore.getInstance().getUser((String)request.getSession().getAttribute("user")).getAboutMe() %> /p>
     <% } %>
   </div>
 </body>
