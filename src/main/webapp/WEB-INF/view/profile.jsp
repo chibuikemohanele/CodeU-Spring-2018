@@ -28,13 +28,13 @@
 
     <% if(request.getSession().getAttribute("user") != null){ %>
       <form action ="/profile" method="POST">
-        <textarea name="About Me" rows="10" col="40">
-          Enter info about yourself here:
+        <textarea 
+            name="About Me" rows="10" col="40">
         </textarea>
         <br>
         <input type="Submit">
        </form>
-       <p> <% UserStore.getInstance().getUser((String)request.getSession().getAttribute("user")).getAboutMe(); %> </p>
+       <!-- <p> <% UserStore.getInstance().getUser((String)request.getSession().getAttribute("user")).getAboutMe(); %> </p> -->
     <% } %>
   </div>
 </body>

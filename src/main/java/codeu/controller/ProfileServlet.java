@@ -41,7 +41,7 @@ public class ProfileServlet extends HttpServlet
         {
             String aboutMe = request.getParameter("About me");
             user.setAboutMe(aboutMe);
-            response.sendRedirect("/profile");
+            UserStore.getInstance().updateUser(user);
         }
     }
 
