@@ -10,7 +10,7 @@ import codeu.model.store.basic.UserStore;
 public class ProfileServlet extends HttpServlet
 {
     private User user;
-    private UserStore userStore;;
+    //private UserStore userStore;
 
     //Forwards the request to the profile.jsp to create the profile page
     @Override
@@ -35,7 +35,7 @@ public class ProfileServlet extends HttpServlet
     throws IOException, ServletException 
     {
         String username = (String) request.getSession().getAttribute("user");
-        user = userStore.getUser(username);
+        user = UserStore.getInstance().getUser(username);
 
         if (request.getSession().getAttribute("user") != null) 
         {
