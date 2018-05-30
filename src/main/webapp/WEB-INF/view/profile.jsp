@@ -34,7 +34,7 @@
         <br>
         <input type="Submit">
        </form>
-       <p> <% UserStore.getInstance().getUser((String)request.getSession().getAttribute("user")).getAboutMe();%> /p>
+       <p> <% UserStore.getInstance().getUser((String)request.getSession().getAttribute("user")).getAboutMe(); %> </p>
     <% } %>
   </div>
 </body>
