@@ -21,7 +21,6 @@
   <div id="container">
     <h1>Profile</h1>
     <h2>This is your profile.</h2>
-
   </div>
 </body>
 </html>
