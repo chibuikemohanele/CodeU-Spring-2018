@@ -18,9 +18,11 @@ public class ProfileServlet extends HttpServlet {
         // Checks to see if the user is logged into his or her page
         if (request.getSession().getAttribute("user") != null) {
             request.getRequestDispatcher("/WEB-INF/view/profile.jsp").forward(request, response);
+            return;
         }
         else {
             request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
+            return;
         }
     }
 
