@@ -63,5 +63,4 @@ public class AdminServlet extends HttpServlet {
 
         request.getRequestDispatcher("/WEB-INF/view/admin.jsp").forward(request, response);
   }
-
 }
