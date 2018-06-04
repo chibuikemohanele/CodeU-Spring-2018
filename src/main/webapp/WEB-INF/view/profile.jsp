@@ -1,4 +1,5 @@
 <%@ page import="codeu.model.store.basic.UserStore" %>
+<%@ page import="codeu.model.data.User" %>
 <%
 UserStore userStore = UserStore.getInstance();
 User user = userStore.getUser((String)request.getSession().getAttribute("user"));
