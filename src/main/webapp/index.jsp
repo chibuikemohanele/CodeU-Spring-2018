@@ -23,14 +23,14 @@
 
   <nav>
     <a id="navTitle" href="/">CodeU Chat App</a>
-    <a href="/activityfeed">Activity Feed</a>
-    <a href="/conversations">Conversations</a>
-    <% if(request.getSession().getAttribute("user") != null){ %>
+    <% if (request.getSession().getAttribute("user") != null){ %>
       <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
     <% } else{ %>
       <a href="/login">Login</a>
     <% } %>
+    <a href="/conversations">Conversations</a>
     <a href="/about.jsp">About</a>
+    <a href="/activityfeed">Activity Feed</a>
   </nav>
 
   <div id="container">
@@ -51,7 +51,7 @@
       <p>
         <strong>Team Name: </strong> 15
       </p>
-      
+
       <p>
         <strong>Project Advisor: </strong> Adrian Swanberg
       </p>
