@@ -52,7 +52,7 @@ public class PersistentStorageAgentTest {
             "test_username",
             "$2a$10$5GNCbSPS1sqqM9.hdiE2hexn1w.vnNoR.CaHIztFEhdAD7h82tqX.",
             Instant.now(),
-            "");
+            "My name is my name.");
     persistentStorageAgent.writeThrough(user);
     Mockito.verify(mockPersistentDataStore).writeThrough(user);
   }
