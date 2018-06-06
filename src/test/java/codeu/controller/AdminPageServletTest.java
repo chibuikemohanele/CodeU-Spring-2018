@@ -71,7 +71,7 @@ public class AdminPageServletTest {
           for (int j = 0; j < 4; j++) {
             UUID msgID = UUID.randomUUID();
             UUID author = UUID.randomUUID();
-            String content = "fake message!! " + Integer.toString(j) + "for conversation " + Integer.toString(i);
+            String content = "" + Integer.toString(j) + "" + Integer.toString(i);
             Instant messageCreation = Instant.now();
             fakeMessageList.add(new Message(msgID, convoID, author, content, messageCreation));
           }
