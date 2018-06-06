@@ -90,8 +90,13 @@ public class MessageStore {
     this.messages = messages;
   }
 
-    /** Return a list of the latest users */
+  /** Return a list of the latest users */
   public List<Message> getLatestMessages() {
     return messages;
+  }
+
+  /** Return message count */
+  public int messageCount() {
+    return messages.size();
   }
 }

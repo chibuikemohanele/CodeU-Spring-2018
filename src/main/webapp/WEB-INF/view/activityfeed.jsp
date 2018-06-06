@@ -25,6 +25,7 @@
 <%@ page import="codeu.model.data.User" %>
 <%@ page import="codeu.model.data.Message" %>
 <%@ page import="codeu.model.store.basic.UserStore" %>
+<%@ page import="codeu.model.store.basic.MessageStore" %>
 <%@ page import="codeu.model.store.basic.ConversationStore" %>
 
 
@@ -62,13 +63,14 @@
 
       <%
         // Stores
-          UserStore userStore = (UserStore) request.getAttribute("users");
-          ConversationStore convoStore = (ConversationStore) request.getAttribute("conversations");
+        UserStore userStore =  UserStore.getInstance();
+        ConversationStore convoStore = ConversationStore.getInstance();
+        MessageStore messageStore = MessageStore.getInstance();
 
         // Lists
-          List<User> users = userStore.getLatestUsers();
-          List<Conversation> conversations = (List<Conversation>) convoStore.getLatestConversations();
-          List<Message> messages = (List<Message>) request.getAttribute("messages");
+        List<User> users = userStore.getLatestUsers();
+        List<Conversation> conversations = (List<Conversation>) convoStore.getLatestConversations();
+        List<Message> messages = messageStore.getLatestMessages();
 
         // Master List
 
@@ -86,7 +88,7 @@
               Date | m | Username | Convo | Message Content
           */
 
-          int totalSize = conversations.size() + users.size() + messages.size();
+          int totalSize = (int) request.getAttribute("totalSize");
           String[][] masterList = new String[totalSize][5];
 
           // add users

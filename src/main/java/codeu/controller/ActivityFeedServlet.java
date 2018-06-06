@@ -92,15 +92,7 @@ public class ActivityFeedServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
-
-      // get convo info 
-      List<Message> messages = messageStore.getLatestMessages();
-
-      // recieve new convo from convo servlet
-      request.setAttribute("conversations", conversationStore);
-      request.setAttribute("users", userStore);
-      request.setAttribute("messages", messages);
-
+      request.setAttribute("totalSize", conversationStore.conversationCount() + userStore.userCount() + messageStore.messageCount());
       request.getRequestDispatcher("/WEB-INF/view/activityfeed.jsp").forward(request, response);
  
   }

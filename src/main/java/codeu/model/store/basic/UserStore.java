@@ -131,5 +131,10 @@ public class UserStore {
   public List<User> getLatestUsers() {
     return users;
   }
+
+  /** Return user count */
+  public int userCount() {
+    return users.size();
+  }
 }
 
