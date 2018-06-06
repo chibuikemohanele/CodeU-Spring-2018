@@ -66,14 +66,14 @@ public class ConversationStore {
     conversations = new ArrayList<>();
   }
 
-/** Access the current set of conversations known to the application. */
+  /** Access the current set of conversations known to the application. */
   public List<Conversation> getAllConversations() {
     return conversations;
   }
 
-  // latest
+  /** Return a list of the latest conversations */
   public List<Conversation> getLatestConversations() {
-    return conversations; // all for now
+    return conversations;
   }
 
   /** Add a new conversation to the current set of conversations known to the application. */
@@ -104,7 +104,7 @@ public class ConversationStore {
   }
 
   /** Find and return the Conversation with the given ID. */
-  public Conversation getConvoWithID(UUID id) {
+  public Conversation getConversationWithID(UUID id) {
     for (Conversation conversation : conversations) {
       if (conversation.getId().equals(id)) {
         return conversation;

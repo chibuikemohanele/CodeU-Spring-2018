@@ -127,8 +127,9 @@ public class UserStore {
     this.users = users;
   }
 
+  /** Return a list of the latest users */
   public List<User> getLatestUsers() {
-    return users; // all for now
+    return users;
   }
 }
 

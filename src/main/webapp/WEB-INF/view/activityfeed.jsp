@@ -91,7 +91,6 @@
 
           // add users
           for (int i = 0; i < users.size(); i++) {
-
               User currUser = users.get(i);
 
               masterList[i][0] = currUser.getCreationTime().toString();
@@ -114,16 +113,15 @@
               masterList[i+buff][4] = "";
           }
 
-          // // add messages
+          // add messages
           for (int i = 0; i < messages.size(); i++) {
-
               Message currMessage = messages.get(i);
               int buff = conversations.size() + users.size();
               
               masterList[i+buff][0] = currMessage.getCreationTime().toString();
               masterList[i+buff][1] = "m";
               masterList[i+buff][2] = (userStore.getUser(currMessage.getAuthorId())).getName();
-              masterList[i+buff][3] = (convoStore.getConvoWithID(currMessage.getConversationId())).getTitle();
+              masterList[i+buff][3] = (convoStore.getConversationWithID(currMessage.getConversationId())).getTitle();
               masterList[i+buff][4] = currMessage.getContent();
           }
 

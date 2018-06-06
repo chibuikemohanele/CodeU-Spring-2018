@@ -90,8 +90,8 @@ public class MessageStore {
     this.messages = messages;
   }
 
-    // latest
+    /** Return a list of the latest users */
   public List<Message> getLatestMessages() {
-    return messages; // all for now
+    return messages;
   }
 }
