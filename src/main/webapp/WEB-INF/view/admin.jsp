@@ -13,15 +13,15 @@
 
   <nav>
     <a id="navTitle" href="/">CodeU Chat App</a>
-    <% if(request.getSession().getAttribute("user") != null){ %>
+    <% if (request.getSession().getAttribute("user") != null) { %>
       <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
-    <% } else{ %>
+    <% } else { %>
       <a href="/login">Login</a>
     <% } %>
     <a href="/conversations">Conversations</a>
     <a href="/about.jsp">About</a>
     <a href="/activityfeed">Activity Feed</a>
-    <% if(request.getSession().getAttribute("user").equals("annietang") ||
+    <% if (request.getSession().getAttribute("user").equals("annietang") ||
         request.getSession().getAttribute("user").equals("chibuikem")) { %>
         <a href="/admin">Admin Page</a>
     <% } %>
@@ -29,13 +29,14 @@
 
   <div id="container">
     <%-- If there are errors, tell Admin.  --%>
-    <% if(request.getAttribute("error") != null) { %>
+    <% if (request.getAttribute("error") != null) { %>
         <h2 style="color:red"><%= request.getAttribute("error") %></h2>
     <% } %>
 
     <%-- Else, display site statistics.  --%>
     <h1> Administration </h1>
     <h2> Site Statistics </h2>
+    <p> Here are some site statistics</p>
     <%
     List<Conversation> conversations = (List<Conversation>) request.getAttribute("conversations");
     List<Message> messages = (List<Message>) request.getAttribute("messages");
@@ -43,13 +44,13 @@
     %>
     <ul>
 
-    <% if(users != null){ %>
+    <% if (users != null) { %>
         <li><strong>Users:</strong> <%= users.size() %> </li>
     <% } %>
-    <% if(conversations != null){ %>
+    <% if (conversations != null) { %>
         <li><strong>Conversations:</strong> <%= conversations.size() %> </li>
     <% } %>
-    <% if(messages != null){ %>
+    <% if (messages != null) { %>
         <li><strong>Messages:</strong> <%= messages.size() %> </li>
     <% } %>
     </ul>
