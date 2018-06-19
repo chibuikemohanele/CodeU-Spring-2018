@@ -90,7 +90,7 @@ public class AdminPageServletTest {
       String name = "random_user_" + Integer.toString(i);
       String passwordHash = "hash" + Integer.toString(i);
       Instant creation = Instant.now();
-      fakeUsersList.add(new User(userID, name, passwordHash, creation));
+      fakeUsersList.add(new User(userID, name, passwordHash, creation, ""));
     }
     Mockito.when(mockUserStore.getAllUsers()).thenReturn(fakeUsersList);
 

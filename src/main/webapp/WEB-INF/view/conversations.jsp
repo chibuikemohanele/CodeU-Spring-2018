@@ -26,6 +26,7 @@
 
   <nav>
     <a id="navTitle" href="/">CodeU Chat App</a>
+    <a href="/activityfeed">Activity Feed</a>
     <% if(request.getSession().getAttribute("user") != null){ %>
       <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
     <% } else{ %>
@@ -33,12 +34,12 @@
     <% } %>
     <a href="/conversations">Conversations</a>
     <a href="/about.jsp">About</a>
-    <a href="/profile">Profile</a>
     <a href="/activityfeed">Activity Feed</a>
     <% if(request.getSession().getAttribute("user").equals("annietang") ||
         request.getSession().getAttribute("user").equals("chibuikem")) { %>
         <a href="/admin">Admin Page</a>
     <% } %>
+    <a href="/profile">Profile</a>
   </nav>
 
   <div id="container">
