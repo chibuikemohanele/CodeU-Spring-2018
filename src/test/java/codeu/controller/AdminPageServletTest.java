@@ -23,7 +23,7 @@ import org.mockito.Mockito;
 
 public class AdminPageServletTest {
 
-  private AdminServlet adminServlet;
+  public AdminServlet adminServlet;
   private HttpServletRequest mockRequest;
   private HttpSession mockSession;
   private HttpServletResponse mockResponse;
