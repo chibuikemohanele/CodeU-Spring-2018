@@ -24,6 +24,7 @@
 <%@ page import="codeu.model.data.Conversation" %>
 <%@ page import="codeu.model.data.User" %>
 <%@ page import="codeu.model.data.Message" %>
+<%@ page import="codeu.model.data.Feed" %>
 <%@ page import="codeu.model.store.basic.UserStore" %>
 <%@ page import="codeu.model.store.basic.MessageStore" %>
 <%@ page import="codeu.model.store.basic.ConversationStore" %>
@@ -152,7 +153,32 @@
            }
         );
 
-      %>
+    %>
+
+  <%
+
+      Feed myFeed = new Feed();
+
+      // add users
+      for (int i = 0; i < users.size(); i++) {
+          User currUser = users.get(i);
+          myFeed.addNewUser(currUser.getCreationTime().toString(), currUser.getName());
+      }
+
+      // add conversations
+      for (int i = 0; i < conversations.size(); i++) {
+          Conversation currConversation = conversations.get(i);
+          myFeed.addNewConversation(currConversation.getCreationTime().toString(), (userStore.getUser(currConversation.getOwnerId())).getName(), currConversation.getTitle());
+      }
+
+      // add messages
+      for (int i = 0; i < messages.size(); i++) {
+          Message currMessage = messages.get(i);
+          myFeed.addNewMessage(currMessage.getCreationTime().toString(), (userStore.getUser(currMessage.getAuthorId())).getName(), (convoStore.getConversationWithID(currMessage.getConversationId())).getTitle(), currMessage.getContent());
+      }
+
+      myFeed.sortByTime();
+  %>
 
 
     <div style="background-color:Silver">
@@ -160,6 +186,64 @@
       <%
           // DATE FORMAT
           SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
+
+          // Iterate through master list
+          for (int x = 0; x < totalSize; x++) {
+
+                Instant ins = Instant.parse(masterList[x][0]); // TODO: use class access methods
+                Date myDate = Date.from(ins);
+                String formattedDate = sdf.format(myDate);
+
+                // Conversations
+                // TODO: use class access methods
+                if (masterList[x][1] == "c") {
+                %>
+
+                  <li>
+                   <strong> <%= formattedDate %>: </strong>
+                   <%= masterList[x][2] /* TODO: use class access methods */%> created a new conversation:
+                   <a href="/chat/<%= masterList[x][3] /* TODO: use class access methods */%>"> <%= masterList[x][3] %></a>.
+                  </li>
+
+                <%
+
+                // Users
+                // TODO: use class access methods
+                } else if (masterList[x][1] == "u") {
+
+                %>
+
+                  <li>
+                   <strong> <%= formattedDate %>: </strong>
+                   <%= masterList[x][2] /* TODO: use class access methods */ %> joined!
+                  </li>
+
+                <%
+
+                // Messages
+                // TODO: use class access methods
+                } else if (masterList[x][1] == "m") {
+
+                %>
+
+                  <li>
+                   <strong> <%= formattedDate %>: </strong>
+                   <%= masterList[x][2] /* TODO: use class access methods */ %> sent a message in
+                   <a href="/chat/<%= masterList[x][3] %>"> <%= masterList[x][3] /* TODO: use class access methods */ %></a>: "<%= masterList[x][4] /* TODO: use class access methods */ %>"
+                  </li>
+
+                <%
+              }
+          }
+      %>
+    </div>
+
+<br>
+    <div style="background-color:Silver">
+
+      <%
+          // DATE FORMAT
+          //SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
 
           // Iterate through master list
           for (int x = 0; x < totalSize; x++) {
