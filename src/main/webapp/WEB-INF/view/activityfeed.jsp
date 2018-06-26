@@ -56,9 +56,9 @@
     <hr/>
 
       <!-- Add to activity feed when:
-              - Users register -- "blahblah joined!" 
-              - Users creating conversations -- "blahblah created a new conversation: Convo17"
-              - Users sending messages -- Blahblah sent a message to Convo 17: Yoyo! 
+              - Users register ~ "blahblah joined!"
+              - Users creating conversations ~ "blahblah created a new conversation: Convo17"
+              - Users sending messages ~ Blahblah sent a message to Convo 17: Yoyo!
       -->
 
       <%
@@ -89,8 +89,10 @@
           */
 
           int totalSize = (int) request.getAttribute("totalSize");
+          // TODO: make object instance of master list instead
           String[][] masterList = new String[totalSize][5];
 
+          // TODO: add users to object
           // add users
           for (int i = 0; i < users.size(); i++) {
               User currUser = users.get(i);
@@ -102,6 +104,7 @@
               masterList[i][4] = "";
           }
 
+          // TODO: add convos to object
           // add convos
           for (int i = 0; i < conversations.size(); i++) {
 
@@ -115,11 +118,12 @@
               masterList[i+buff][4] = "";
           }
 
+          // TODO: add messages to objects
           // add messages
           for (int i = 0; i < messages.size(); i++) {
               Message currMessage = messages.get(i);
               int buff = conversations.size() + users.size();
-              
+
               masterList[i+buff][0] = currMessage.getCreationTime().toString();
               masterList[i+buff][1] = "m";
               masterList[i+buff][2] = (userStore.getUser(currMessage.getAuthorId())).getName();
@@ -130,9 +134,10 @@
 
 
           // SORT MASTER LIST BASED ON TIMESTAMP
+          // TODO: object instance sort by time
           Arrays.sort(masterList, new java.util.Comparator<String[]>() {
                public int compare(String[] a, String[] b) {
-                   
+
                   Instant ins1 = Instant.parse(a[0]);
                   Date date1 = Date.from(ins1);
 
@@ -152,51 +157,54 @@
 
     <div style="background-color:Silver">
 
-      <% 
+      <%
           // DATE FORMAT
           SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
-          
+
           // Iterate through master list
           for (int x = 0; x < totalSize; x++) {
 
-                Instant ins = Instant.parse(masterList[x][0]);
+                Instant ins = Instant.parse(masterList[x][0]); // TODO: use class access methods
                 Date myDate = Date.from(ins);
                 String formattedDate = sdf.format(myDate);
 
                 // Conversations
+                // TODO: use class access methods
                 if (masterList[x][1] == "c") {
                 %>
 
                   <li>
                    <strong> <%= formattedDate %>: </strong>
-                   <%= masterList[x][2] %> created a new conversation:
-                   <a href="/chat/<%= masterList[x][3] %>"> <%= masterList[x][3] %></a>.
-                  </li> 
+                   <%= masterList[x][2] /* TODO: use class access methods */%> created a new conversation:
+                   <a href="/chat/<%= masterList[x][3] /* TODO: use class access methods */%>"> <%= masterList[x][3] %></a>.
+                  </li>
 
                 <%
 
                 // Users
+                // TODO: use class access methods
                 } else if (masterList[x][1] == "u") {
-              
+
                 %>
 
                   <li>
                    <strong> <%= formattedDate %>: </strong>
-                   <%= masterList[x][2] %> joined!
-                  </li> 
+                   <%= masterList[x][2] /* TODO: use class access methods */ %> joined!
+                  </li>
 
                 <%
 
                 // Messages
+                // TODO: use class access methods
                 } else if (masterList[x][1] == "m") {
-                
+
                 %>
 
                   <li>
                    <strong> <%= formattedDate %>: </strong>
-                   <%= masterList[x][2] %> sent a message in
-                   <a href="/chat/<%= masterList[x][3] %>"> <%= masterList[x][3] %></a>: "<%= masterList[x][4] %>"
-                  </li> 
+                   <%= masterList[x][2] /* TODO: use class access methods */ %> sent a message in
+                   <a href="/chat/<%= masterList[x][3] %>"> <%= masterList[x][3] /* TODO: use class access methods */ %></a>: "<%= masterList[x][4] /* TODO: use class access methods */ %>"
+                  </li>
 
                 <%
               }

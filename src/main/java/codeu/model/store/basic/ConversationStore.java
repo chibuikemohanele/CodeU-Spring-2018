@@ -66,16 +66,6 @@ public class ConversationStore {
     conversations = new ArrayList<>();
   }
 
-  /** Access the current set of conversations known to the application. */
-  public List<Conversation> getAllConversations() {
-    return conversations;
-  }
-
-  /** Return a list of the latest conversations */
-  public List<Conversation> getLatestConversations() {
-    return conversations;
-  }
-
   /** Add a new conversation to the current set of conversations known to the application. */
   public void addConversation(Conversation conversation) {
     conversations.add(conversation);
@@ -118,6 +108,16 @@ public class ConversationStore {
     this.conversations = conversations;
   }
 
+  /** Access the current set of conversations known to the application. */
+  public List<Conversation> getAllConversations() {
+    return conversations;
+  }
+
+  /** Return a list of the latest conversations */
+  public List<Conversation> getLatestConversations() {
+    return conversations;
+  }
+  
   /** Return conversation count */
   public int conversationCount() {
     return conversations.size();
