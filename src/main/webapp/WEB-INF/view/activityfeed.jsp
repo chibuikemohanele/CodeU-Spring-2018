@@ -73,229 +73,76 @@
         List<Conversation> conversations = (List<Conversation>) convoStore.getLatestConversations();
         List<Message> messages = messageStore.getLatestMessages();
 
-        // Master List
+        // New Feed
+        Feed myFeed = new Feed();
 
-          /*
-            Overall Format:
-              Date | Mode | Username | Convo | Message Content
+        // add users
+        for (int i = 0; i < users.size(); i++) {
+            User currUser = users.get(i);
+            myFeed.addNewUser(currUser.getCreationTime().toString(), currUser.getName());
+        }
 
-            Convo Format:
-              Date | c | Username | Convo | NULL
+        // add conversations
+        for (int i = 0; i < conversations.size(); i++) {
+            Conversation currConversation = conversations.get(i);
+            myFeed.addNewConversation(currConversation.getCreationTime().toString(), (userStore.getUser(currConversation.getOwnerId())).getName(), currConversation.getTitle());
+        }
 
-            User Format:
-              Date | u | Username |  NULL | NULL
+        // add messages
+        for (int i = 0; i < messages.size(); i++) {
+            Message currMessage = messages.get(i);
+            myFeed.addNewMessage(currMessage.getCreationTime().toString(), (userStore.getUser(currMessage.getAuthorId())).getName(), (convoStore.getConversationWithID(currMessage.getConversationId())).getTitle(), currMessage.getContent());
+        }
 
-            Message Format:
-              Date | m | Username | Convo | Message Content
-          */
-
-          int totalSize = (int) request.getAttribute("totalSize");
-          // TODO: make object instance of master list instead
-          String[][] masterList = new String[totalSize][5];
-
-          // TODO: add users to object
-          // add users
-          for (int i = 0; i < users.size(); i++) {
-              User currUser = users.get(i);
-
-              masterList[i][0] = currUser.getCreationTime().toString();
-              masterList[i][1] = "u";
-              masterList[i][2] = currUser.getName();
-              masterList[i][3] = "";
-              masterList[i][4] = "";
-          }
-
-          // TODO: add convos to object
-          // add convos
-          for (int i = 0; i < conversations.size(); i++) {
-
-              Conversation currConvo = conversations.get(i);
-              int buff = users.size();
-
-              masterList[i+buff][0] = currConvo.getCreationTime().toString();
-              masterList[i+buff][1] = "c";
-              masterList[i+buff][2] = (userStore.getUser(currConvo.getOwnerId())).getName();
-              masterList[i+buff][3] = currConvo.getTitle();
-              masterList[i+buff][4] = "";
-          }
-
-          // TODO: add messages to objects
-          // add messages
-          for (int i = 0; i < messages.size(); i++) {
-              Message currMessage = messages.get(i);
-              int buff = conversations.size() + users.size();
-
-              masterList[i+buff][0] = currMessage.getCreationTime().toString();
-              masterList[i+buff][1] = "m";
-              masterList[i+buff][2] = (userStore.getUser(currMessage.getAuthorId())).getName();
-              masterList[i+buff][3] = (convoStore.getConversationWithID(currMessage.getConversationId())).getTitle();
-              masterList[i+buff][4] = currMessage.getContent();
-          }
-
-
-
-          // SORT MASTER LIST BASED ON TIMESTAMP
-          // TODO: object instance sort by time
-          Arrays.sort(masterList, new java.util.Comparator<String[]>() {
-               public int compare(String[] a, String[] b) {
-
-                  Instant ins1 = Instant.parse(a[0]);
-                  Date date1 = Date.from(ins1);
-
-                  Instant ins2 = Instant.parse(b[0]);
-                  Date date2 = Date.from(ins2);
-
-                   if (date2.before(date1))
-                      return -1;
-                   else
-                     return 1;
-               }
-           }
-        );
-
+        myFeed.sortByTime();
     %>
 
-  <%
-
-      Feed myFeed = new Feed();
-
-      // add users
-      for (int i = 0; i < users.size(); i++) {
-          User currUser = users.get(i);
-          myFeed.addNewUser(currUser.getCreationTime().toString(), currUser.getName());
-      }
-
-      // add conversations
-      for (int i = 0; i < conversations.size(); i++) {
-          Conversation currConversation = conversations.get(i);
-          myFeed.addNewConversation(currConversation.getCreationTime().toString(), (userStore.getUser(currConversation.getOwnerId())).getName(), currConversation.getTitle());
-      }
-
-      // add messages
-      for (int i = 0; i < messages.size(); i++) {
-          Message currMessage = messages.get(i);
-          myFeed.addNewMessage(currMessage.getCreationTime().toString(), (userStore.getUser(currMessage.getAuthorId())).getName(), (convoStore.getConversationWithID(currMessage.getConversationId())).getTitle(), currMessage.getContent());
-      }
-
-      myFeed.sortByTime();
-  %>
-
-
     <div style="background-color:Silver">
-
       <%
-          // DATE FORMAT
+          // Date format
           SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
 
-          // Iterate through master list
+          // Iterate through feed
+          int totalSize = (int) request.getAttribute("totalSize");
+
           for (int x = 0; x < totalSize; x++) {
 
-                Instant ins = Instant.parse(masterList[x][0]); // TODO: use class access methods
+                Instant ins = Instant.parse(myFeed.getEventDate(x));
                 Date myDate = Date.from(ins);
                 String formattedDate = sdf.format(myDate);
 
                 // Conversations
-                // TODO: use class access methods
-                if (masterList[x][1] == "c") {
+                if (myFeed.getEventType(x) == "c") {
                 %>
-
                   <li>
                    <strong> <%= formattedDate %>: </strong>
-                   <%= masterList[x][2] /* TODO: use class access methods */%> created a new conversation:
-                   <a href="/chat/<%= masterList[x][3] /* TODO: use class access methods */%>"> <%= masterList[x][3] %></a>.
+                   <%= myFeed.getUsername(x) %> created a new conversation:
+                   <a href="/chat/<%= myFeed.getConversationTitle(x) %>"> <%= myFeed.getConversationTitle(x) %></a>.
                   </li>
-
                 <%
 
                 // Users
-                // TODO: use class access methods
-                } else if (masterList[x][1] == "u") {
-
+                } else if (myFeed.getEventType(x) == "u") {
                 %>
-
                   <li>
                    <strong> <%= formattedDate %>: </strong>
-                   <%= masterList[x][2] /* TODO: use class access methods */ %> joined!
+                   <%= myFeed.getUsername(x) %> joined!
                   </li>
-
                 <%
 
                 // Messages
-                // TODO: use class access methods
-                } else if (masterList[x][1] == "m") {
-
+                } else if (myFeed.getEventType(x) == "m") {
                 %>
-
                   <li>
                    <strong> <%= formattedDate %>: </strong>
-                   <%= masterList[x][2] /* TODO: use class access methods */ %> sent a message in
-                   <a href="/chat/<%= masterList[x][3] %>"> <%= masterList[x][3] /* TODO: use class access methods */ %></a>: "<%= masterList[x][4] /* TODO: use class access methods */ %>"
+                   <%= myFeed.getUsername(x) %> sent a message in
+                   <a href="/chat/<%= myFeed.getConversationTitle(x) %>"> <%= myFeed.getConversationTitle(x) %></a>: "<%= myFeed.getMessageContent(x) %>"
                   </li>
-
                 <%
               }
           }
       %>
     </div>
-
-<br>
-    <div style="background-color:Silver">
-
-      <%
-          // DATE FORMAT
-          //SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
-
-          // Iterate through master list
-          for (int x = 0; x < totalSize; x++) {
-
-                Instant ins = Instant.parse(masterList[x][0]); // TODO: use class access methods
-                Date myDate = Date.from(ins);
-                String formattedDate = sdf.format(myDate);
-
-                // Conversations
-                // TODO: use class access methods
-                if (masterList[x][1] == "c") {
-                %>
-
-                  <li>
-                   <strong> <%= formattedDate %>: </strong>
-                   <%= masterList[x][2] /* TODO: use class access methods */%> created a new conversation:
-                   <a href="/chat/<%= masterList[x][3] /* TODO: use class access methods */%>"> <%= masterList[x][3] %></a>.
-                  </li>
-
-                <%
-
-                // Users
-                // TODO: use class access methods
-                } else if (masterList[x][1] == "u") {
-
-                %>
-
-                  <li>
-                   <strong> <%= formattedDate %>: </strong>
-                   <%= masterList[x][2] /* TODO: use class access methods */ %> joined!
-                  </li>
-
-                <%
-
-                // Messages
-                // TODO: use class access methods
-                } else if (masterList[x][1] == "m") {
-
-                %>
-
-                  <li>
-                   <strong> <%= formattedDate %>: </strong>
-                   <%= masterList[x][2] /* TODO: use class access methods */ %> sent a message in
-                   <a href="/chat/<%= masterList[x][3] %>"> <%= masterList[x][3] /* TODO: use class access methods */ %></a>: "<%= masterList[x][4] /* TODO: use class access methods */ %>"
-                  </li>
-
-                <%
-              }
-          }
-      %>
-    </div>
-
   </div>
 </body>
 </html>
